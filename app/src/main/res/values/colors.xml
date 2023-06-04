@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="melon">#FF5F6B</color>
+    <color name="twiter">#00A2F5</color>
+    <color name="facebbok">#0066A9</color>
+    <color name="holder">#95595353</color>
 </resources>
