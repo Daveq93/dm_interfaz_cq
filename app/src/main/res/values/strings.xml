@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">dm_interfaz_cq</string>
-    <string name="twitterText">Twitter</string>
-
-    <string name="facebookText">Facebook</string>
-</resources>
+    <string name="name_banner">Pedidos</string>
+    <string name="name_subtitle">¡Hola! Es bueno verte nuevamente</string>
+    <string name="label_correo">Correo</string>
+    <string name="label_password">Contraseña</string>
+    <string name="hint_user_name">User name</string>
+    <string name="hint_password">Password</string>
+    <string name="label_redes">O conécteseusando las redes sociales</string>
+    <string name="btn_ingresar">Ingresar</string>
+    <string name="btn_facebook">Facebook</string>
+    <string name="btn_twitter">Twitter</string>
+    <string name="label_registro">Registrese</string>
+    <string name="label_olvido_pass"></string>
+    </resources>

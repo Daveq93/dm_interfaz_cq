@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="txtTitle">
+        <item name="android:textColor"> @color/black</item>
+         <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/txt_14sp_size</item>
+    </style>
+
+    <style name="txtSubTitle">
+        <item name="android:textColor"> @color/holder</item>
+        <item name="android:textSize">@dimen/txt_18sp_size</item>
+    </style>
+
+    <style name="txtLabels">
+        <item name="android:textColor"> @color/melon</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/txt_14sp_size</item>
+    </style>
+</resources>

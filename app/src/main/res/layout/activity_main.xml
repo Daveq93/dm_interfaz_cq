@@ -8,187 +8,178 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="140dp"
-        android:layout_height="138dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="151dp"
+        android:layout_height="166dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_edi"
-         />
+        app:srcCompat="@drawable/logo_edi" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:id="@+id/txt_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="59dp"
-        android:text="Pedidos Online"
+        android:layout_marginStart="@dimen/marginStartEnd"
+        android:layout_marginTop="192dp"
+        android:layout_marginEnd="@dimen/marginStartEnd"
+        android:text="@string/name_banner"
         android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-         />
-
-    <EditText
-        android:id="@+id/editTextCorreo"
-        android:layout_width="328dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="40dp"
-        android:ems="10"
-        android:hint="Ingrese email"
-        android:inputType="text"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
-    <EditText
-        android:id="@+id/editTextPass"
-        android:layout_width="328dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="40dp"
-        android:ems="10"
-        android:hint="Ingrese contraseña"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCorreo"
-         />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
+        android:id="@+id/text_saludo"
+        style="@style/txtSubTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="41dp"
-        android:text="Contraseña"
-        android:textColor="@color/melon"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPass"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginStart="@dimen/marginStartEnd"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="@dimen/marginStartEnd"
+        android:text="@string/name_subtitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_title" />
+
+    <TextView
+        android:id="@+id/lbl_correo"
+        style="@style/txtLabels"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStartEnd"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="@dimen/marginStartEnd"
+        android:text="@string/label_correo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_saludo" />
+
+    <EditText
+        android:id="@+id/txt_orreo"
+        android:layout_width="329dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="@dimen/marginStartEnd"
+        android:layout_marginEnd="@dimen/marginStartEnd"
+        android:hint="@string/hint_user_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_correo" />
+
+    <TextView
+        android:id="@+id/lbl_pass"
+        style="@style/txtLabels"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStartEnd"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="@dimen/marginStartEnd"
+        android:text="@string/label_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lbl_correo" />
+
+    <EditText
+        android:id="@+id/txt_pass"
+        android:layout_width="328dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="@dimen/marginStartEnd"
+        android:hint="@string/label_password"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_pass" />
 
     <Button
         android:id="@+id/btnIngresar"
-        android:layout_width="328dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStartEnd"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="@dimen/marginStartEnd"
         android:backgroundTint="@color/melon"
-        android:text="Ingresar"
+        android:text="@string/btn_ingresar"
         android:textSize="18sp"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.041"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPass" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_pass" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:id="@+id/txt_redes"
+        style="@style/txtSubTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="@dimen/marginStartEnd"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="@dimen/marginStartEnd"
         android:text="O conectese usando las redes sociales"
-        android:textColor="@color/holder"
-        android:textSize="12sp"
-        android:textStyle="bold"
+
         app:layout_constraintEnd_toStartOf="@+id/btnFacebook"
+        app:layout_constraintHorizontal_bias="0.559"
         app:layout_constraintStart_toStartOf="@+id/btnFacebook"
         app:layout_constraintTop_toBottomOf="@+id/btnIngresar" />
 
     <Button
         android:id="@+id/btnTwitter"
-        android:layout_width="155dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="37dp"
+        android:layout_width="@dimen/btn_altern_width"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginStart="@dimen/marginStartEnd"
+        android:layout_marginTop="52dp"
         android:backgroundTint="@color/twiter"
- android:drawableLeft="@drawable/twitter_30"
-        android:text="@string/twitterText"
-        android:textAlignment="center"
+        android:drawableLeft="@drawable/twitter_30"
+        android:text="@string/btn_twitter"
+
         app:cornerRadius="10dp"
 
-
-        app:iconGravity="textStart"
-        app:iconPadding="1dp"
-        app:iconSize="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/btnIngresar" />
 
     <Button
         android:id="@+id/btnFacebook"
-        android:layout_width="155dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="37dp"
-        android:layout_marginEnd="40dp"
+        android:layout_width="@dimen/btn_altern_width"
+        android:layout_height="@dimen/btn_height"
+
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="@dimen/marginStartEnd"
         android:backgroundTint="@color/facebbok"
-        android:text="@string/facebookText"
+        android:text="@string/btn_facebook"
+        android:textSize="15sp"
         app:cornerRadius="10dp"
         app:icon="@drawable/facebook_30"
         app:iconSize="32dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnTwitter"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/btnIngresar" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/txt_olvido_contra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="79dp"
-        android:layout_marginTop="38dp"
+        android:layout_marginStart="@dimen/marginStartEnd"
+        android:layout_marginTop="20dp"
         android:text="¿Olvidó su contraseña?"
         android:textColor="@color/holder"
         android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnFacebook"
-         />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Correo"
-        android:textColor="@color/melon"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editTextCorreo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.114"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/btnTwitter" />
 
     <TextView
         android:id="@+id/btnRegistrese"
+        style="@style/txtLabels"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:text="Registrese"
-        android:textColor="@color/melon"
-        android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-         />
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="20dp"
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="12dp"
-        android:text="¡Hola! Es bueno verte nuevamente"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:layout_marginEnd="@dimen/marginStartEnd"
+        android:text="Registrese"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txt_olvido_contra"
+        app:layout_constraintStart_toEndtOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnFacebook" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
