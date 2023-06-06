@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.activities.MainActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -67,13 +67,12 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
+        android:layout_marginStart="41dp"
         android:text="Contraseña"
         android:textColor="@color/melon"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/editTextPass"
-        app:layout_constraintStart_toStartOf="parent"
-         />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnIngresar"
@@ -102,31 +101,41 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/btnFacebook"
         app:layout_constraintStart_toStartOf="@+id/btnFacebook"
-        app:layout_constraintTop_toBottomOf="@+id/btnIngresar"
-         />
+        app:layout_constraintTop_toBottomOf="@+id/btnIngresar" />
 
     <Button
         android:id="@+id/btnTwitter"
-        android:layout_width="113dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="155dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="37dp"
         android:backgroundTint="@color/twiter"
-        android:text="Twiter"
+ android:drawableLeft="@drawable/twitter_30"
+        android:text="@string/twitterText"
         android:textAlignment="center"
         app:cornerRadius="10dp"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
+
+
+        app:iconGravity="textStart"
+        app:iconPadding="1dp"
+        app:iconSize="48dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btnFacebook"
-        android:layout_width="119dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="155dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="40dp"
         android:backgroundTint="@color/facebbok"
-        android:text="Facebook"
+        android:text="@string/facebookText"
         app:cornerRadius="10dp"
+        app:icon="@drawable/facebook_30"
+        app:iconSize="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnTwitter"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:ignore="MissingConstraints" />
@@ -158,8 +167,7 @@
         app:layout_constraintHorizontal_bias="0.114"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8"
-        app:layout_constraintVertical_bias="1.0"
-         />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/btnRegistrese"
