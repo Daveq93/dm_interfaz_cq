@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.snackbar.Snackbar
 import com.uce.edu.R
 import com.uce.edu.databinding.ActivityMainBinding
@@ -25,6 +26,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initClass() {
+
+
+
         var btnIng = binding.btnIngresar.setOnClickListener {
             val check = LoginValidator().checkLogin(
                 binding.txtOrreo.text.toString(),
@@ -41,5 +45,8 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+
+
+
     }
 }

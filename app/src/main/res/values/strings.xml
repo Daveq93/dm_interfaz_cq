@@ -12,4 +12,8 @@
     <string name="btn_twitter">Twitter</string>
     <string name="label_registro">Registrese</string>
     <string name="label_olvido_pass"></string>
-    </resources>
+    <string name="favoritos">Favoritos</string>
+    <string name="chat_gpt">Chat GPT</string>
+    <string name="inicio">Inicio</string>
+
+</resources>

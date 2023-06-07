@@ -86,6 +86,7 @@
         android:layout_width="328dp"
         android:layout_height="50dp"
         android:layout_marginStart="@dimen/marginStartEnd"
+        android:layout_marginEnd="@dimen/marginStartEnd"
         android:hint="@string/label_password"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
@@ -109,7 +110,7 @@
 
     <TextView
         android:id="@+id/txt_redes"
-        style="@style/txtSubTitle"
+        style="@style/txtSubTitle2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginStartEnd"
@@ -131,9 +132,7 @@
         android:backgroundTint="@color/twiter"
         android:drawableLeft="@drawable/twitter_30"
         android:text="@string/btn_twitter"
-
         app:cornerRadius="10dp"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnIngresar" />
 
@@ -141,14 +140,14 @@
         android:id="@+id/btnFacebook"
         android:layout_width="@dimen/btn_altern_width"
         android:layout_height="@dimen/btn_height"
-
+android:drawableLeft="@drawable/facebook_30"
         android:layout_marginTop="52dp"
         android:layout_marginEnd="@dimen/marginStartEnd"
         android:backgroundTint="@color/facebbok"
         android:text="@string/btn_facebook"
         android:textSize="15sp"
         app:cornerRadius="10dp"
-        app:icon="@drawable/facebook_30"
+
         app:iconSize="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnIngresar" />
@@ -178,7 +177,7 @@
         android:text="Registrese"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txt_olvido_contra"
-        app:layout_constraintStart_toEndtOf="parent"
+
         app:layout_constraintTop_toBottomOf="@+id/btnFacebook" />
 
 
