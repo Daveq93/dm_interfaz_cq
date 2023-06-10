@@ -7,6 +7,8 @@ import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import com.uce.edu.R
 import com.uce.edu.databinding.ActivitySegundaPantallaBinding
+import com.uce.edu.ui.fragments.FirstFragment
+
 class SegundaPantalla : AppCompatActivity() {
 
     private lateinit var binding:ActivitySegundaPantallaBinding
@@ -40,6 +42,16 @@ class SegundaPantalla : AppCompatActivity() {
                         suma+=i
                     }
                     Snackbar.make(binding.textView, "Entramos a inicio "+suma, Snackbar.LENGTH_LONG).show()
+
+                    val frag = FirstFragment()
+                    val transaction = supportFragmentManager.beginTransaction()//necesito un contenedor y un objeto que se va a alojar en el contenedor
+                    //transaction.replace(binding.frmContainer.id,frag)//en el activity, para que se carge solo uno
+                    transaction.add(binding.frmContainer.id,frag)//en el activity, para que se añada a  la pila
+                    transaction.addToBackStack(null) //esto lo usamos si tenemos en add
+                    //como se añade a la pila, por cada vez que presionamos el boton donde se carga el fragment
+                    //tendiramos que presionar el numero igual de veces volver atras, porque se va agregando cada vez a la pila
+                    transaction.commit()
+
                     true
                 }
                 R.id.favoritos -> {
