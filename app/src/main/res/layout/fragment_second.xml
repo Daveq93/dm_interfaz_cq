@@ -4,23 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/facebbok"
-   
-    tools:context=".ui.fragments.FirstFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-
+    tools:context=".ui.fragments.SecondFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_1_frangment"
+        android:id="@+id/card_2_fragment"
         android:layout_width="match_parent"
-        android:layout_height="155dp"
+        android:layout_height="250dp"
         android:layout_margin="35dp"
         android:animateLayoutChanges="false"
         app:cardCornerRadius="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="25dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
         >
@@ -31,54 +26,34 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/imageView42"
                 android:layout_width="wrap_content"
                 android:layout_height="120dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/logo_edi"
+                android:src="@drawable/baseline_message_24"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/textView42"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:gravity="bottom|center_horizontal"
-                android:text="Probando fragment"
+                android:text="Segundo fragment"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView42" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
-<Spinner
-    android:id="@+id/spinner"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="25dp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/card_1_frangment"
-    ></Spinner>
-
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner"></ListView>
-
 
 
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

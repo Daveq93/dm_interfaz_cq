@@ -28,6 +28,16 @@
         app:layout_constraintTop_toBottomOf="@+id/btnVolver"
 />
 
+    <FrameLayout
+        android:id="@+id/frm_container_2"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnVolver"
+        />
+
     <Button
         android:id="@+id/btnVolver"
         android:layout_width="wrap_content"
@@ -39,10 +49,13 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
+    <!--app:itemActiveIndicatorStyle="@style/"-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:itemIconTint="@drawable/cualquiera"
+        app:itemActiveIndicatorStyle="@style/Animation.Design.BottomSheetDialog"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
