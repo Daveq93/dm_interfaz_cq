@@ -1,12 +1,10 @@
 package com.uce.edu.ui.fragments
 
-import android.os.Binder
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.SimpleAdapter
 import androidx.fragment.app.Fragment
 import com.uce.edu.R
 import com.uce.edu.databinding.FragmentFirstBinding

@@ -11,15 +11,19 @@ class FragmentsManager {
         container: Int,
         fragment: Fragment
     ) {
-
-
         with(manager.beginTransaction()) {
             replace(container, fragment)
             addToBackStack(null)
             commit()
         }
-
-
     }
 
+    fun addFragment(manager: FragmentManager, container: Int, fragment:Fragment){
+        with(manager.beginTransaction()){
+            add(container, fragment)
+            addToBackStack(null)
+            commit()
+        }
+
+    }
 }
