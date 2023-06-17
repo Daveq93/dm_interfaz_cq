@@ -5,9 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.uce.edu.R
 import com.uce.edu.databinding.FragmentFirstBinding
+import com.uce.edu.entity.MarvelChars
+import com.uce.edu.logic.list.ListItems
+import com.uce.edu.ui.adapters.MarvelAdapter
 
 /**
  * A simple [Fragment] subclass.
@@ -41,6 +47,15 @@ class FirstFragment : Fragment() {
         )
 
         binding.spinner.adapter = adapter
-        binding.listView.adapter = adapter
+
+       // binding.listView.adapter = adapter
+
+        val rvAdapter = MarvelAdapter(ListItems().returnMarvelChars())
+        val rvMarvel = binding.rvMarvelChars
+        rvMarvel.adapter = rvAdapter
+        rvMarvel.layoutManager = LinearLayoutManager(requireActivity(),
+            LinearLayoutManager.VERTICAL,
+            false)
+
     }
 }

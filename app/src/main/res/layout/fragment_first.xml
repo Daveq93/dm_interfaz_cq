@@ -8,8 +8,6 @@
 
     tools:context=".ui.fragments.FirstFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_1_fragment"
@@ -32,9 +30,8 @@
 
             <ImageView
                 android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
-                android:layout_height="120dp"
-                android:layout_marginTop="16dp"
+                android:layout_width="370dp"
+                android:layout_height="98dp"
                 android:src="@drawable/logo_edi"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -45,7 +42,6 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
                 android:gravity="bottom|center_horizontal"
                 android:text="Probando fragment"
                 android:textSize="30sp"
@@ -63,8 +59,10 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_margin="25dp"
+        android:layout_marginTop="108dp"
         android:background="@color/amarillo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/card_1_fragment" />
 
@@ -73,6 +71,7 @@
         android:layout_height="439dp"
         android:layout_marginStart="25dp"
 
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -83,7 +82,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMarvelChars"
             android:layout_width="match_parent"
-            android:layout_height="425dp"></androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="wrap_content"
+
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 

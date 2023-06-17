@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -15,44 +15,61 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/borrar"
+        >
 
-        <TextView
-            android:id="@+id/txtName"
-            android:layout_width="154dp"
-            android:layout_height="29dp"
-            android:layout_marginStart="15dp"
 
-            android:layout_marginTop="28dp"
-            android:text="Marvel"
-            android:textSize="24sp"
-            app:layout_constraintStart_toEndOf="@+id/imageView1"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/txtComic"
-            android:layout_width="153dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="15dp"
-
+        <LinearLayout
+            android:layout_width="203dp"
+            android:layout_height="108dp"
+            android:layout_marginStart="23dp"
             android:layout_marginTop="24dp"
-            android:text="Marvel"
-            android:textSize="24sp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imageView1"
-            app:layout_constraintTop_toBottomOf="@+id/txtName" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="154dp"
+                android:layout_height="29dp"
+                android:layout_marginStart="15dp"
+
+                android:layout_marginTop="28dp"
+                android:text="Marvel"
+                android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@+id/imageView1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtComic"
+                android:layout_width="153dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="15dp"
+
+                android:layout_marginTop="24dp"
+                android:text="Marvel"
+                android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@+id/imageView1"
+                app:layout_constraintTop_toBottomOf="@+id/txtName" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/imageView1"
             android:layout_width="125dp"
             android:layout_height="125dp"
-            android:layout_margin="10dp"
+            android:layout_marginTop="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.2" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
 

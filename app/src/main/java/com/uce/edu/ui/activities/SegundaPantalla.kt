@@ -28,11 +28,11 @@ class SegundaPantalla : AppCompatActivity() {
     }
 
     fun initClas() {
-        var btnVol = binding.btnVolver.setOnClickListener {
-            var intent = Intent(this, MainActivity::class.java)
-
-            startActivity(intent)
-        }
+//        var btnVol = binding.btnVolver.setOnClickListener {
+//            var intent = Intent(this, MainActivity::class.java)
+//
+//            startActivity(intent)
+//        }
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
 

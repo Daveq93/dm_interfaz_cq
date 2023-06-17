@@ -20,8 +20,8 @@ fun returnItems():List<LoginUser>{
             MarvelChars(
                 1,
                 "Wolverine",
-            "Wolverine",
-"https://comicvine.gamespot.com/a/uploads/scale_small/5/57023/7469590-wolverinerb.jpg"
+                "Wolverine",
+                "https://comicvine.gamespot.com/a/uploads/scale_small/5/57023/7469590-wolverinerb.jpg"
             ),
             MarvelChars(
                 2,
