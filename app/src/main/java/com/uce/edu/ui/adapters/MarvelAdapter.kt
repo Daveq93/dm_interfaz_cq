@@ -10,7 +10,8 @@ import com.uce.edu.R
 import com.uce.edu.databinding.MarvelCharactersBinding
 import com.uce.edu.entity.MarvelChars
 
-class MarvelAdapter(private val items: List<MarvelChars>) :
+class MarvelAdapter(private val items: List<MarvelChars>,
+private var fnClick:(MarvelChars) -> Unit ) ://no devuelve nada, analogia a void
     RecyclerView.Adapter<MarvelAdapter.MarvelViewHolder>() {
 
     class MarvelViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -18,15 +19,16 @@ class MarvelAdapter(private val items: List<MarvelChars>) :
         private val binding : MarvelCharactersBinding= MarvelCharactersBinding.bind(view)
 
 
-        fun render(item:MarvelChars){
+        fun render(item:MarvelChars,fnClick:(MarvelChars) -> Unit){
             println("Recibiendo a: ${item.name}")
             binding.imageView1.bringToFront()
             binding.txtName.text = item.name
             binding.txtComic.text =item.comic
             Picasso.get().load(item.image).into(binding.imageView1)
 
-            binding.imageView1.setOnClickListener {
-                Snackbar.make(binding.imageView1,item.name,Snackbar.LENGTH_SHORT).show()
+           itemView.setOnClickListener {
+               // Snackbar.make(binding.imageView1,item.name,Snackbar.LENGTH_SHORT).show()
+                   fnClick(item)
             }
         }
     }
@@ -43,7 +45,7 @@ class MarvelAdapter(private val items: List<MarvelChars>) :
     }
 
     override fun onBindViewHolder(holder: MarvelAdapter.MarvelViewHolder, position: Int) {
-        holder.render(items[position])
+        holder.render(items[position],fnClick)
     }
 
     override fun getItemCount(): Int = items.size
