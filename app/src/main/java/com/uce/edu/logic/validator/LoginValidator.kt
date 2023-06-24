@@ -1,6 +1,6 @@
 package com.uce.edu.logic.validator
 
-import com.uce.edu.entity.LoginUser
+import com.uce.edu.data.entity.LoginUser
 
 class LoginValidator {
     fun checkLogin(email:String, pass:String):Boolean{

@@ -13,14 +13,19 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="TextView"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"/>
 
 
     <ImageView
         android:id="@+id/imageM"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></ImageView>
+        android:layout_width="166dp"
+        android:layout_height="138dp"
+        android:layout_gravity="center"
+
+
+
+        ></ImageView>
 
 
 </LinearLayout>

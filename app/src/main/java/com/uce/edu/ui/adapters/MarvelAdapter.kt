@@ -4,14 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import com.uce.edu.R
 import com.uce.edu.databinding.MarvelCharactersBinding
-import com.uce.edu.entity.MarvelChars
+import com.uce.edu.data.marvel.MarvelChars
 
 class MarvelAdapter(private val items: List<MarvelChars>,
-private var fnClick:(MarvelChars) -> Unit ) ://no devuelve nada, analogia a void
+                    private var fnClick:(MarvelChars) -> Unit ) ://no devuelve nada, analogia a void
     RecyclerView.Adapter<MarvelAdapter.MarvelViewHolder>() {
 
     class MarvelViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -19,7 +18,7 @@ private var fnClick:(MarvelChars) -> Unit ) ://no devuelve nada, analogia a void
         private val binding : MarvelCharactersBinding= MarvelCharactersBinding.bind(view)
 
 
-        fun render(item:MarvelChars,fnClick:(MarvelChars) -> Unit){
+        fun render(item: MarvelChars, fnClick:(MarvelChars) -> Unit){
             println("Recibiendo a: ${item.name}")
             binding.imageView1.bringToFront()
             binding.txtName.text = item.name

@@ -1,4 +1,4 @@
-package com.uce.edu.entity
+package com.uce.edu.data.marvel
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

@@ -1,11 +1,9 @@
 package com.uce.edu.ui.activities
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.squareup.picasso.Picasso
 import com.uce.edu.databinding.ActivityDetailsMarvelItemBinding
-import com.uce.edu.databinding.MarvelCharactersBinding
-import com.uce.edu.entity.MarvelChars
+import com.uce.edu.data.marvel.MarvelChars
 
 class DetailsMarvelItem : AppCompatActivity() {
 
