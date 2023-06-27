@@ -2,13 +2,13 @@ package com.uce.edu.logic.jikanLogic
 
 import com.uce.edu.data.connections.ApiConnection
 import com.uce.edu.data.endpoint.JikanEndPoint
-import com.uce.edu.data.marvel.MarvelChars
+import com.uce.edu.data.entity.marvel.MarvelChars
 
 class JikanAnimeLogic {
 
   suspend fun getAllAnimes():List<MarvelChars>{
-        var call = ApiConnection.getJikanConnection()
-       val response = call!!.create(JikanEndPoint::class.java)?.getAllAnimes()
+        var response = ApiConnection.getService(ApiConnection.typeApi.Jikan,JikanEndPoint::class.java).getAllAnimes()
+      // val response = call!!.create(JikanEndPoint::class.java)?.getAllAnimes()
 
         var itemList = arrayListOf<MarvelChars>()
 
@@ -16,7 +16,8 @@ class JikanAnimeLogic {
           if(response.isSuccessful){
               if (response != null) {
                   response.body()!!.data.forEach{
-                      val m = MarvelChars(it.mal_id,
+                      val m = MarvelChars(
+                          it.mal_id,
                           it.title,
                           it.titles[0].title,
                           it.images.jpg.image_url)

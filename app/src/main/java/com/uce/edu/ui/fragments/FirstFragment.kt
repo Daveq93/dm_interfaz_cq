@@ -11,9 +11,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uce.edu.R
 import com.uce.edu.databinding.FragmentFirstBinding
-import com.uce.edu.data.marvel.MarvelChars
+import com.uce.edu.data.entity.marvel.MarvelChars
 import com.uce.edu.logic.jikanLogic.JikanAnimeLogic
 import com.uce.edu.logic.list.ListItems
+import com.uce.edu.logic.marvelLogic.MarvelLogic
 import com.uce.edu.ui.activities.DetailsMarvelItem
 import com.uce.edu.ui.adapters.MarvelAdapter
 import kotlinx.coroutines.Dispatchers
@@ -76,7 +77,8 @@ class FirstFragment : Fragment() {
 
         lifecycleScope.launch(Dispatchers.IO){
             val rvAdapter = MarvelAdapter(
-                JikanAnimeLogic().getAllAnimes()
+                //JikanAnimeLogic().getAllAnimes()
+            MarvelLogic().getMarvelChars(   name="Captain",limit=20)
             ){sendMarvelItem(it)}
 
            withContext(Dispatchers.Main){

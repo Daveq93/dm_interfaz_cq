@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.uce.edu.R
 import com.uce.edu.databinding.MarvelCharactersBinding
-import com.uce.edu.data.marvel.MarvelChars
+import com.uce.edu.data.entity.marvel.MarvelChars
 
 class MarvelAdapter(private val items: List<MarvelChars>,
                     private var fnClick:(MarvelChars) -> Unit ) ://no devuelve nada, analogia a void
