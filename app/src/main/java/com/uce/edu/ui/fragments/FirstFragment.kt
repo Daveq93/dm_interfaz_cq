@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.uce.edu.R
 import com.uce.edu.databinding.FragmentFirstBinding
 import com.uce.edu.data.entity.marvel.MarvelChars
@@ -27,9 +28,11 @@ import kotlinx.coroutines.withContext
  * create an instance of this fragment.
  */
 class FirstFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
 
     private lateinit var binding: FragmentFirstBinding
+   private lateinit var  lmanager :LinearLayoutManager
+  private  var rvAdapter: MarvelAdapter = MarvelAdapter { sendMarvelItem(it) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +41,11 @@ class FirstFragment : Fragment() {
         binding = FragmentFirstBinding.inflate(layoutInflater, container, false)
         // Inflate the layout for this fragment
         //  return inflater.inflate(R.layout.fragment_first, container, false)
+       lmanager = LinearLayoutManager(
+           requireActivity(),LinearLayoutManager.VERTICAL,
+           false
+       )
+
         return binding.root
     }
 
@@ -53,43 +61,76 @@ class FirstFragment : Fragment() {
         )
 
         binding.spinner.adapter = adapter1
+        chargeDataRV("cap")
 
-        chargeDataRV()
 
         binding.rvSwipe.setOnRefreshListener{
-            chargeDataRV()
+            chargeDataRV("cap")
             binding.rvSwipe.isRefreshing=false
         }
-       // binding.listView.adapter = adapter
+
+        binding.rvMarvelChars.addOnScrollListener(
+            object :RecyclerView.OnScrollListener(){
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)//dy para abajo contando y mostrando, y la dx de izquierda a derecha
+                    val v =lmanager.childCount//cuantos elementos tengo
+                    val p = lmanager.findFirstVisibleItemPosition()//cual es mi posicion actual
+                    val t = lmanager.itemCount//cuantos tengo en toal
+
+               if(dy>0){
+                   if((v+p)>=t){
+                       lifecycleScope.launch((Dispatchers.IO)){
+                         val newItems = JikanAnimeLogic().getAllAnimes()
+
+                          /* val newItems = MarvelLogic().getMarvelChars(
+                               name = "spider",
+                               limit = 20
+                           )*/
+                           withContext(Dispatchers.Main){
+                               rvAdapter.updateListItems((newItems))
+                           }
+
+                       }
+                   }
+               }
+                }
+            }
+        )
 
 
     }
     //Un intent se encuentra en un activity o un fragment
-
     //una analogia a serializacion es el parcelable, es  mas eficiente pero mas dificil de implementar
     fun sendMarvelItem(item: MarvelChars){
         val i = Intent(requireActivity(), DetailsMarvelItem::class.java)
         i.putExtra("name",item)
         startActivity(i)
     }
-
-    fun chargeDataRV(){
+/*
+    fun corrtine(){
+        lifecycleScope.launch(Dispatchers.Main){
+            var name="dave"
+          name= withContext(Dispatchers.IO){
+                name = "Maria"
+              return@withContext name
+            }
+            //aqui va el codigo que necesitemos
+           // binding.card1Fragment.radius
+        }
+    }
+    */
+    fun chargeDataRV(search:String){
 
         lifecycleScope.launch(Dispatchers.IO){
-            val rvAdapter = MarvelAdapter(
-                //JikanAnimeLogic().getAllAnimes()
-            MarvelLogic().getMarvelChars(   name="Captain",limit=20)
-            ){sendMarvelItem(it)}
+             rvAdapter.items =JikanAnimeLogic().getAllAnimes()
 
            withContext(Dispatchers.Main){
                val rvMarvel = binding.rvMarvelChars
-               with(rvMarvel){
-                   this.adapter = rvAdapter
-                   this.layoutManager= LinearLayoutManager(
-                       requireActivity(),LinearLayoutManager.VERTICAL,false
-                   )
-               }
-           }
+            with(rvMarvel){
+                this.adapter = rvAdapter
+                this.layoutManager= lmanager
+            }
+        }
 
         }
 
