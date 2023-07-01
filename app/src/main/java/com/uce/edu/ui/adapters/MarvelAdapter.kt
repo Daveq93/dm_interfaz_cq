@@ -12,14 +12,12 @@ import com.uce.edu.data.marvel.MarvelChars
 class MarvelAdapter(private val items: List<MarvelChars>,
                     private var fnClick:(MarvelChars) -> Unit ) ://no devuelve nada, analogia a void
     RecyclerView.Adapter<MarvelAdapter.MarvelViewHolder>() {
-
     class MarvelViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val binding : MarvelCharactersBinding= MarvelCharactersBinding.bind(view)
 
-
         fun render(item: MarvelChars, fnClick:(MarvelChars) -> Unit){
-            println("Recibiendo a: ${item.name}")
+          //  println("Recibiendo a: ${item.name}")
             binding.imageView1.bringToFront()
             binding.txtName.text = item.name
             binding.txtComic.text =item.comic

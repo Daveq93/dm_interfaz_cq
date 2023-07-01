@@ -26,9 +26,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initClass() {
-
-
-
         var btnIng = binding.btnIngresar.setOnClickListener {
             val check = LoginValidator().checkLogin(
                 binding.txtOrreo.text.toString(),

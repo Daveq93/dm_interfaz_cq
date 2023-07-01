@@ -5,7 +5,6 @@ import com.uce.edu.data.endpoint.JikanEndPoint
 import com.uce.edu.data.marvel.MarvelChars
 
 class JikanAnimeLogic {
-
   suspend fun getAllAnimes():List<MarvelChars>{
         var call = ApiConnection.getJikanConnection()
        val response = call!!.create(JikanEndPoint::class.java)?.getAllAnimes()

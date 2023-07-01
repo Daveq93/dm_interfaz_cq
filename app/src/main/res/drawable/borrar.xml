@@ -3,11 +3,10 @@
 <item>
     <shape>
         <gradient android:angle="180"
-            android:startColor="@color/melon"
-            android:endColor="@color/facebbok"
-            android:type="sweep"
+            android:startColor="@color/amarillo"
+            android:endColor="@color/melon"
+            android:type="linear"
             >
-
         </gradient>
     </shape>
 </item>

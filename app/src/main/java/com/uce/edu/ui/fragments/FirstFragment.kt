@@ -26,8 +26,6 @@ import kotlinx.coroutines.withContext
  * create an instance of this fragment.
  */
 class FirstFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-
     private lateinit var binding: FragmentFirstBinding
 
     override fun onCreateView(

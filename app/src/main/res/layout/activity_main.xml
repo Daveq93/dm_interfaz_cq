@@ -59,8 +59,8 @@
 
     <EditText
         android:id="@+id/txt_orreo"
-        android:layout_width="329dp"
-        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/minimumHeight"
         android:layout_marginStart="@dimen/marginStartEnd"
         android:layout_marginEnd="@dimen/marginStartEnd"
         android:hint="@string/hint_user_name"
@@ -83,8 +83,8 @@
 
     <EditText
         android:id="@+id/txt_pass"
-        android:layout_width="328dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/minimumHeight"
         android:layout_marginStart="@dimen/marginStartEnd"
         android:layout_marginEnd="@dimen/marginStartEnd"
         android:hint="@string/label_password"
