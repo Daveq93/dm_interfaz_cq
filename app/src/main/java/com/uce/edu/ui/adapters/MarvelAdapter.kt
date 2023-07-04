@@ -9,16 +9,13 @@ import com.uce.edu.R
 import com.uce.edu.databinding.MarvelCharactersBinding
 import com.uce.edu.data.entity.marvel.MarvelChars
 
-class MarvelAdapter(
-                    private var fnClick:(MarvelChars) -> Unit ) ://no devuelve nada, analogia a void
+class MarvelAdapter(private var items:List<MarvelChars>,private var fnClick:(MarvelChars) -> Unit) ://no devuelve nada, analogia a void
     RecyclerView.Adapter<MarvelAdapter.MarvelViewHolder>() {
 
-    var items: List<MarvelChars> = listOf()
+    //var items: List<MarvelChars> = listOf()
     class MarvelViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val binding : MarvelCharactersBinding= MarvelCharactersBinding.bind(view)
-
-
         fun render(item: MarvelChars, fnClick:(MarvelChars) -> Unit){
             println("Recibiendo a: ${item.name}")
             binding.imageView1.bringToFront()
@@ -54,5 +51,8 @@ class MarvelAdapter(
         this.items = this.items.plus(newItems)
         notifyDataSetChanged()
     }
-
+    fun replaceListAdapter(newItems:List<MarvelChars>){
+        this.items = newItems
+            notifyDataSetChanged()
+    }
 }
