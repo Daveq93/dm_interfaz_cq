@@ -13,9 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.uce.edu.R
 import com.uce.edu.databinding.FragmentFirstBinding
-import com.uce.edu.data.entity.marvel.MarvelChars
+import com.uce.edu.logic.data.MarvelChars
 import com.uce.edu.logic.jikanLogic.JikanAnimeLogic
-import com.uce.edu.logic.list.ListItems
 import com.uce.edu.logic.marvelLogic.MarvelLogic
 import com.uce.edu.ui.activities.DetailsMarvelItem
 import com.uce.edu.ui.adapters.MarvelAdapter
@@ -35,7 +34,7 @@ class FirstFragment : Fragment() {
     private lateinit var lmanager: LinearLayoutManager
     private lateinit var rvAdapter: MarvelAdapter
     private var page = 1
-    private lateinit var marvelCharsItems: MutableList<MarvelChars>
+    private var marvelCharsItems: MutableList<MarvelChars> = mutableListOf<MarvelChars>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -71,10 +70,10 @@ class FirstFragment : Fragment() {
 //            binding.rvSwipe.isRefreshing = false
 //        }
         binding.rvSwipe.setOnRefreshListener {
-            lifecycleScope.launch(Dispatchers.Main){
+            lifecycleScope.launch(Dispatchers.Main) {
                 chargeDataRV(5)
-                binding.rvSwipe.isRefreshing=false
-                lmanager.scrollToPositionWithOffset(5,20)
+                binding.rvSwipe.isRefreshing = false
+                lmanager.scrollToPositionWithOffset(5, 20)
             }
         }
 
@@ -107,9 +106,9 @@ class FirstFragment : Fragment() {
                     }
                 }
             })
-        binding.txtFilter.addTextChangedListener {filteredText->
-           val newItems = marvelCharsItems.filter { items->
-                items.name.contains(filteredText.toString())
+        binding.txtFilter.addTextChangedListener { filteredText ->
+            val newItems = marvelCharsItems.filter { items ->
+                items.name.lowercase().contains(filteredText.toString().lowercase())
             }
             rvAdapter.replaceListAdapter(newItems)
         }
@@ -138,7 +137,7 @@ class FirstFragment : Fragment() {
             }
         }
         */
-    fun chargeDataRV(pos:Int) {
+    fun chargeDataRV(pos: Int) {
 //        lifecycleScope.launch(Dispatchers.IO) {
 //            rvAdapter.items = JikanAnimeLogic().getAllAnimes()
 //
@@ -151,20 +150,20 @@ class FirstFragment : Fragment() {
 //            }
 //        }
 
-        lifecycleScope.launch(Dispatchers.IO) {
-           var marvelCharsItems=MarvelLogic().getMarvelChars(
-               "spider",page*2
-           )
-            rvAdapter = MarvelAdapter(marvelCharsItems,fnClick = {sendMarvelItem(it)})
-            withContext(Dispatchers.Main) {
-                with(binding.rvMarvelChars) {
-                    this.adapter = rvAdapter
-                    this.layoutManager = layoutManager
-                }
-                lmanager.scrollToPositionWithOffset(pos, 10)
-            }
-        }
-        page++
-    }
+        lifecycleScope.launch(Dispatchers.Main) {
+           marvelCharsItems.addAll(withContext(Dispatchers.IO) {
+                return@withContext (MarvelLogic().getMarvelChars(
+                    "spider", 20
+                ))
+            })
 
+            //rvAdapter = MarvelAdapter(marvelCharsItems, fnClick = { sendMarvelItem(it) })
+            rvAdapter.items = marvelCharsItems
+            binding.rvMarvelChars.apply {
+                this.adapter = rvAdapter
+                this.layoutManager = layoutManager
+            }
+          //  lmanager.scrollToPositionWithOffset(pos, 10)
+        }
+    }
 }

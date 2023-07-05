@@ -1,9 +1,8 @@
 package com.uce.edu.logic.marvelLogic
 
 import com.uce.edu.data.connections.ApiConnection
-import com.uce.edu.data.endpoint.JikanEndPoint
 import com.uce.edu.data.endpoint.MarvelEndPoint
-import com.uce.edu.data.entity.marvel.MarvelChars
+import com.uce.edu.logic.data.MarvelChars
 
 class MarvelLogic {
 
