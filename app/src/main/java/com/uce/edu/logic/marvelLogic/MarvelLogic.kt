@@ -1,5 +1,6 @@
 package com.uce.edu.logic.marvelLogic
 
+import android.util.Log
 import com.uce.edu.data.connections.ApiConnection
 import com.uce.edu.data.endpoint.MarvelEndPoint
 import com.uce.edu.data.entity.marvel.characters.database.MarvelCharsDB
@@ -8,76 +9,55 @@ import com.uce.edu.data.entity.marvel.characters.getMarvelChars
 import com.uce.edu.logic.data.MarvelChars
 import com.uce.edu.logic.data.getMarvelCharsDB
 import com.uce.edu.ui.utilities.DispositivosMoviles
+import kotlin.math.log
 
 class MarvelLogic {
 
 
     suspend fun getMarvelChars(name: String, limit: Int): List<MarvelChars> {
-        var call =
-            ApiConnection.getService(ApiConnection.typeApi.Marvel, MarvelEndPoint::class.java)
-        // val response = call!!.create(JikanEndPoint::class.java)?.getAllAnimes()
 
         var itemList = arrayListOf<MarvelChars>()
+        var response = ApiConnection.getService(
+            ApiConnection.typeApi.Marvel,
+            MarvelEndPoint::class.java
+        ).getCharactersStarWith(name, limit)
 
-
-        if (call != null) {
-            var response = call.getCharactersStarWith(name, limit)
-            if (response.isSuccessful) {
-
-
-                if (response != null) {
-                    response.body()!!.data.results.forEach {
-                        var comic: String = ""
-                        if (it.comics.items.size > 0) {
-                            comic = it.comics.items[0].name
-                        }
-                        val m = MarvelChars(
-                            it.id,
-                            it.name,
-                            comic,
-                            it.thumbnail.path + "." + it.thumbnail.extension
-                        )
-                        itemList.add(m)
-
-                    }
-                }
+        if(response.isSuccessful){
+            response.body()!!.data.results.forEach{
+                val m=it.getMarvelChars()
+                itemList.add(m)
             }
+        }else{
+
         }
         return itemList
     }
 
 
-    suspend fun getAllMarvelChars(offset: Int, limit: Int): List<MarvelChars> {
+    suspend fun getAllMarvelChars(offset: Int, limit: Int): ArrayList<MarvelChars> {
         var itemList = arrayListOf<MarvelChars>()
         val response = ApiConnection.getService(
             ApiConnection.typeApi.Marvel,
             MarvelEndPoint::class.java
-
-
         ).getAllMarvelsChars(offset, limit)
 
-
-        if (response != null) {
-            response.body()!!.data.results.forEach() {
+        if (response.isSuccessful) {
+            response.body()!!.data.results.forEach{
                 val m = it.getMarvelChars()
                 itemList.add(m)
             }
+        }else{
+            Log.d("DM",response.toString())
         }
         return itemList
     }
 
     suspend fun getAllMarvelCharDB(): List<MarvelChars> {
         var items: ArrayList<MarvelChars> = ArrayList()
-        val itemsAux = DispositivosMoviles.getDBInstance().marvelDato().getAllCharacters()
+        val itemsAux = DispositivosMoviles.getDBInstance().marvelDao().getAllCharacters()
         itemsAux.forEach {
             items.add(
                 it.getMarvelChars()
-//                MarvelChars(
-//                it.id,
-//                it.name,
-//                it.comic,
-//                it.image
-//            )
             )
         }
         return items
@@ -85,11 +65,12 @@ class MarvelLogic {
 
 
     suspend fun insertMarvelCharstoDB(items: List<MarvelChars>) {
-        var itemsDB = arrayListOf<MarvelChars>()
+        var itemsDB = arrayListOf<MarvelCharsDB>()
         items.forEach {
             itemsDB.add(it.getMarvelCharsDB())
         }
 
+        DispositivosMoviles.getDBInstance().marvelDao().insertMarvelCharacter(itemsDB)
 
     }
 }

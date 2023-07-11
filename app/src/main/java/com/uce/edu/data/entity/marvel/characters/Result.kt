@@ -17,7 +17,7 @@ data class Result(
 )
 
 fun Result.getMarvelChars():MarvelChars{
-    var comic :String =""
+    var comic :String ="No available"
     if(comics.items.isNotEmpty()){
         comic = comics.items[0].name
     }

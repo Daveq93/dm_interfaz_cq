@@ -2,7 +2,8 @@ package com.uce.edu.data.connections
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.uce.edu.data.dao.marvel.MarvelCharsDao
+import com.uce.edu.data.dao.marvel.MarvelCharsDAO
+
 import com.uce.edu.data.entity.marvel.characters.database.MarvelCharsDB
 
 @Database(
@@ -11,6 +12,6 @@ import com.uce.edu.data.entity.marvel.characters.database.MarvelCharsDB
 )
 abstract class MarvelConectionDB:RoomDatabase() {
 
-    abstract fun marvelDato():MarvelCharsDao
+    abstract fun marvelDao(): MarvelCharsDAO
 
 }

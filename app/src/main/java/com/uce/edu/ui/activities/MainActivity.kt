@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         initClass()
 
-        val db = DispositivosMoviles.getDBInstance()
-        db.marvelDato()
+//        val db = DispositivosMoviles.getDBInstance()
+//        db.marvelDao()
     }
 
     fun initClass() {
