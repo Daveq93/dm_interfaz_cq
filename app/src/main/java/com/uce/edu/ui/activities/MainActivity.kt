@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.uce.edu.R
 import com.uce.edu.databinding.ActivityMainBinding
 import com.uce.edu.logic.validator.LoginValidator
+import com.uce.edu.ui.utilities.DispositivosMoviles
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,33 +21,30 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    override fun onStart(){
+    override fun onStart() {
         super.onStart()
         initClass()
+
+        val db = DispositivosMoviles.getDBInstance()
+        db.marvelDato()
     }
 
     fun initClass() {
-
-
 
         var btnIng = binding.btnIngresar.setOnClickListener {
             val check = LoginValidator().checkLogin(
                 binding.txtOrreo.text.toString(),
                 binding.txtPass.text.toString()
             )
-            if (check){
-                var intent = Intent(this,SegundaPantalla::class.java)
+            if (check) {
+                var intent = Intent(this, SegundaPantalla::class.java)
 
-                intent.putExtra("var1","")
-                intent.putExtra("var2",2)
+                intent.putExtra("var1", "")
+                intent.putExtra("var2", 2)
                 startActivity(intent)
-            }else{
+            } else {
                 Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
             }
-
         }
-
-
-
     }
 }

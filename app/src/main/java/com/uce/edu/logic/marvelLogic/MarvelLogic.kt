@@ -2,8 +2,12 @@ package com.uce.edu.logic.marvelLogic
 
 import com.uce.edu.data.connections.ApiConnection
 import com.uce.edu.data.endpoint.MarvelEndPoint
+import com.uce.edu.data.entity.marvel.characters.database.MarvelCharsDB
+import com.uce.edu.data.entity.marvel.characters.database.getMarvelChars
 import com.uce.edu.data.entity.marvel.characters.getMarvelChars
 import com.uce.edu.logic.data.MarvelChars
+import com.uce.edu.logic.data.getMarvelCharsDB
+import com.uce.edu.ui.utilities.DispositivosMoviles
 
 class MarvelLogic {
 
@@ -60,5 +64,32 @@ class MarvelLogic {
             }
         }
         return itemList
+    }
+
+    suspend fun getAllMarvelCharDB(): List<MarvelChars> {
+        var items: ArrayList<MarvelChars> = ArrayList()
+        val itemsAux = DispositivosMoviles.getDBInstance().marvelDato().getAllCharacters()
+        itemsAux.forEach {
+            items.add(
+                it.getMarvelChars()
+//                MarvelChars(
+//                it.id,
+//                it.name,
+//                it.comic,
+//                it.image
+//            )
+            )
+        }
+        return items
+    }
+
+
+    suspend fun insertMarvelCharstoDB(items: List<MarvelChars>) {
+        var itemsDB = arrayListOf<MarvelChars>()
+        items.forEach {
+            itemsDB.add(it.getMarvelCharsDB())
+        }
+
+
     }
 }

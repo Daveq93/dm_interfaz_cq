@@ -19,6 +19,7 @@ import com.uce.edu.logic.jikanLogic.JikanAnimeLogic
 import com.uce.edu.logic.marvelLogic.MarvelLogic
 import com.uce.edu.ui.activities.DetailsMarvelItem
 import com.uce.edu.ui.adapters.MarvelAdapter
+import com.uce.edu.ui.utilities.DispositivosMoviles
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -147,10 +148,10 @@ class FirstFragment : Fragment() {
             rvAdapter.items = MarvelLogic().getAllMarvelChars(0, 99)
 
             withContext(Dispatchers.Main) {
-              with(binding.rvMarvelChars){
-                  this.adapter = rvAdapter
-                  this.layoutManager = gManager
-              }
+                with(binding.rvMarvelChars) {
+                    this.adapter = rvAdapter
+                    this.layoutManager = gManager
+                }
             }
         }
 
@@ -169,5 +170,35 @@ class FirstFragment : Fragment() {
              }
            //  lmanager.scrollToPositionWithOffset(pos, 10)
          }*/
+
     }
+
+
+    fun chargeDataRVDB(pos: Int) {
+        lifecycleScope.launch(Dispatchers.Main) {
+            marvelCharsItems.addAll(withContext(Dispatchers.IO) {
+                return@withContext MarvelLogic().getAllMarvelCharDB().toMutableList()
+            })
+
+            if(marvelCharsItems.isEmpty()){
+                marvelCharsItems = withContext(Dispatchers.IO){
+                    return@withContext(MarvelLogic().getAllMarvelChars(0, page * 3)).toMutableList()
+                }
+            }
+
+            withContext(Dispatchers.IO){
+                MarvelLogic().insertMarvelCharstoDB(marvelCharsItems)
+            }
+
+            rvAdapter.items = marvelCharsItems
+            binding.rvMarvelChars.apply {
+                this.adapter = rvAdapter
+                this.layoutManager = gManager
+                gManager.scrollToPositionWithOffset(pos, 10)
+            }
+
+        }
+        page++
+    }
+
 }
