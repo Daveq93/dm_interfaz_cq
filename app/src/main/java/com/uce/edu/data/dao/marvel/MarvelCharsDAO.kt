@@ -10,7 +10,7 @@ interface MarvelCharsDAO {
     @Query("select * from MarvelCharsDB")
     fun getAllCharacters():List<MarvelCharsDB>
 
-    @Query("select * from MarvelCharsDB where id= :id")
+   @Query("select * from MarvelCharsDB where id= :id")
     fun getOneCharacter(id: Int) : MarvelCharsDB
 
     @Insert
