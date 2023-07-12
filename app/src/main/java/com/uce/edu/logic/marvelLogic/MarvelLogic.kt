@@ -73,4 +73,24 @@ class MarvelLogic {
         DispositivosMoviles.getDBInstance().marvelDao().insertMarvelCharacter(itemsDB)
 
     }
+
+    suspend fun getInitChars(page:Int): List<MarvelChars> {
+        var items = mutableListOf<MarvelChars>()
+        try{
+            items = MarvelLogic()
+                .getAllMarvelCharDB()
+                .toMutableList()
+            if (items.isEmpty()){
+                items=(MarvelLogic().getAllMarvelChars(
+                    0,page*3
+                ))
+                MarvelLogic().insertMarvelCharstoDB(items)
+            }
+        }catch (ex:Exception){
+            throw RuntimeException(ex.message)
+        }
+
+
+        return items
+    }
 }

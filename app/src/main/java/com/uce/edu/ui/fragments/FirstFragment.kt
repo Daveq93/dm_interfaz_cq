@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.uce.edu.R
 import com.uce.edu.databinding.FragmentFirstBinding
 import com.uce.edu.logic.data.MarvelChars
@@ -20,6 +21,7 @@ import com.uce.edu.logic.marvelLogic.MarvelLogic
 import com.uce.edu.ui.activities.DetailsMarvelItem
 import com.uce.edu.ui.adapters.MarvelAdapter
 import com.uce.edu.ui.utilities.DispositivosMoviles
+import com.uce.edu.ui.utilities.Metodos
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -35,7 +37,8 @@ class FirstFragment : Fragment() {
     private lateinit var binding: FragmentFirstBinding
     private lateinit var lmanager: LinearLayoutManager
     private var rvAdapter: MarvelAdapter = MarvelAdapter { sendMarvelItem(it) }
-    private var page = 1
+    private var limit = 99
+    private var offset = 0
 
     private var marvelCharsItems: MutableList<MarvelChars> = mutableListOf<MarvelChars>()
 
@@ -69,7 +72,7 @@ class FirstFragment : Fragment() {
         )
 
         binding.spinner.adapter = adapter1
-        chargeDataRV(5)
+        chargeDataRV(limit,offset)
 
 
 //        binding.rvSwipe.setOnRefreshListener {
@@ -142,7 +145,7 @@ class FirstFragment : Fragment() {
             }
         }
         */
-    fun chargeDataRV(pos: Int) {
+    fun chargeDataRVInit(pos: Int) {
 //        lifecycleScope.launch(Dispatchers.Main) {
 //            rvAdapter.items = MarvelLogic().getAllMarvelChars(0, 99)
 //
@@ -154,23 +157,30 @@ class FirstFragment : Fragment() {
 //            }
 //        }
 
-        lifecycleScope.launch(Dispatchers.Main) {
-            marvelCharsItems = withContext(Dispatchers.IO) {
-                return@withContext (MarvelLogic().getAllMarvelChars(
-                    0, page * 3
-                ))
+        if(Metodos().isOnline(requireActivity())){
+            lifecycleScope.launch(Dispatchers.Main) {
+                marvelCharsItems = withContext(Dispatchers.IO) {
+                    return@withContext (MarvelLogic().getAllMarvelChars(
+                        0, page * 3
+                    ))
+                }
+
+                //rvAdapter = MarvelAdapter(marvelCharsItems, fnClick = { sendMarvelItem(it) })
+                rvAdapter.items = marvelCharsItems
+                binding.rvMarvelChars.apply {
+                    this.adapter = rvAdapter
+                    this.layoutManager = gManager
+
+                    gManager.scrollToPositionWithOffset(pos, 10)
+                }
+                page++
             }
 
-            //rvAdapter = MarvelAdapter(marvelCharsItems, fnClick = { sendMarvelItem(it) })
-            rvAdapter.items = marvelCharsItems
-            binding.rvMarvelChars.apply {
-                this.adapter = rvAdapter
-                this.layoutManager = gManager
-
-                gManager.scrollToPositionWithOffset(pos, 10)
-            }
+        }else{
+            Snackbar.make(binding.card1Fragment,"No hay conexion",Snackbar.LENGTH_LONG).show()
         }
-        page++
+
+
     }
 
 
@@ -178,7 +188,6 @@ class FirstFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.Main) {
             marvelCharsItems = withContext(Dispatchers.IO) {
                 var items = MarvelLogic().getAllMarvelCharDB()
-
 
                 if (items.isEmpty()) {
                     items = (MarvelLogic().getAllMarvelChars(
