@@ -20,10 +20,10 @@
             android:name=".ui.activities.DetailsMarvelItem"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.MainActivity"
+            android:name=".ui.activities.SegundaPantalla"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.SegundaPantalla"
+            android:name=".ui.activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

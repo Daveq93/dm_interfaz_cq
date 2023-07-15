@@ -2,11 +2,14 @@ package com.uce.edu.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.widget.addTextChangedListener
+import androidx.datastore.dataStore
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,11 +23,13 @@ import com.uce.edu.logic.jikanLogic.JikanAnimeLogic
 import com.uce.edu.logic.marvelLogic.MarvelLogic
 import com.uce.edu.ui.activities.DetailsMarvelItem
 import com.uce.edu.ui.adapters.MarvelAdapter
+import com.uce.edu.ui.data.UserDataStore
 import com.uce.edu.ui.utilities.DispositivosMoviles
 import com.uce.edu.ui.utilities.Metodos
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.concurrent.Flow
 
 /**
  * A simple [Fragment] subclass.
@@ -62,6 +67,15 @@ class FirstFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        lifecycleScope.launch(Dispatchers.Main) {
+            getDataStore().collect {user->
+                Log.d("UCE",user.email)
+                Log.d("UCE",user.name)
+                Log.d("UCE",user.session)
+            }
+        }
+
         val names = arrayListOf<String>("Karen", "Maria", "Grace", "Joa", "Pepito de los palotes")
 
         val adapter1 = ArrayAdapter<String>(
@@ -72,7 +86,7 @@ class FirstFragment : Fragment() {
         )
 
         binding.spinner.adapter = adapter1
-        chargeDataRV(limit,offset)
+        chargeDataRV(limit, offset)
 
 
 //        binding.rvSwipe.setOnRefreshListener {
@@ -157,7 +171,7 @@ class FirstFragment : Fragment() {
 //            }
 //        }
 
-        if(Metodos().isOnline(requireActivity())){
+        if (Metodos().isOnline(requireActivity())) {
             lifecycleScope.launch(Dispatchers.Main) {
                 marvelCharsItems = withContext(Dispatchers.IO) {
                     return@withContext (MarvelLogic().getAllMarvelChars(
@@ -176,8 +190,8 @@ class FirstFragment : Fragment() {
                 page++
             }
 
-        }else{
-            Snackbar.make(binding.card1Fragment,"No hay conexion",Snackbar.LENGTH_LONG).show()
+        } else {
+            Snackbar.make(binding.card1Fragment, "No hay conexion", Snackbar.LENGTH_LONG).show()
         }
 
 
@@ -209,4 +223,18 @@ class FirstFragment : Fragment() {
         }
         page++
     }
+
+    private fun getDataStore()=
+
+        requireActivity().dataStore.data.map { prefs ->
+            UserDataStore(
+               name= prefs[stringPreferencesKey("usuario")].orEmpty(),
+               email= prefs[stringPreferencesKey("contrasenia")].orEmpty(),
+               session =  prefs[stringPreferencesKey("pass")].orEmpty()
+            )
+        }
+
+
+
+
 }
