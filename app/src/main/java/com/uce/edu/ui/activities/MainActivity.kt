@@ -9,7 +9,6 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.lifecycleScope
 import com.uce.edu.R
@@ -19,11 +18,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.UUID
 
+//es una extension general; es una mini base de datos (clave-valor)
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class MainActivity : AppCompatActivity() {
 
     // At the top level of your kotlin file:
-    val Context.dataStore: DataStore<Preferences>
-    by preferencesDataStore(name = "settings")
+
 
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private suspend fun saveDataStore(stringData:String){
         dataStore.edit {prefs->//hace una funcion suspendida y se tiene que ejecutar en una corrutina

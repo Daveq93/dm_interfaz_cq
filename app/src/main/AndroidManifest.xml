@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -20,10 +21,10 @@
             android:name=".ui.activities.DetailsMarvelItem"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.SegundaPantalla"
+            android:name=".ui.activities.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.MainActivity"
+            android:name=".ui.activities.SegundaPantalla"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

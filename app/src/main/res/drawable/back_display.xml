@@ -2,14 +2,15 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 <item>
     <shape>
-        <gradient android:angle="0"
-            android:startColor="@color/starCard"
-            android:centerColor="@color/centerCard"
-            android:endColor="@color/endCard"
+        <gradient android:angle="90"
+            android:startColor="@color/white_gray"
+            android:centerColor="@color/black_less"
+            android:endColor="@color/black"
             android:type="linear"
             >
 
         </gradient>
     </shape>
+
 </item>
 </selector>

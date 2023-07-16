@@ -7,4 +7,9 @@
     <color name="facebbok">#0066A9</color>
     <color name="holder">#95595353</color>
     <color name="amarillo">#F4D537</color>
+    <color name="black_less">#373636</color>
+    <color name="white_gray">#AAA9A9</color>
+    <color name="starCard">#970000</color>
+    <color name="centerCard">#FF0000</color>
+    <color name="endCard">#FF9191</color>
 </resources>

@@ -19,18 +19,13 @@ class DetailsMarvelItem : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-//        var name:String?=""
-//
-//        intent.extras?.let{
-//            name = it.getString("name")
-//        }
-//        if(!name.isNullOrEmpty()){
-//            binding.textView2.text=name
-//        }
+
         val item = intent.getParcelableExtra<MarvelChars>("name")
         if(item != null){
-            binding.textView2.text = item.name
+            binding.txtName.text = item.name
             Picasso.get().load(item.image).into(binding.imageM)
+            binding.txtComic.text=item.comic
+           // binding.txtSinopsis.text=item.sinopsis
         }
     }
 }

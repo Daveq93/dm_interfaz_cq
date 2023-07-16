@@ -30,4 +30,20 @@
         <item name="fontFamily">serif</item>
         <item name="android:textSize">@dimen/txt_25sp_size</item>
     </style>
+
+    <style name="txt_card">
+        <item name="android:textColor"> @color/white</item>
+        <item name="fontFamily">serif</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/txt_14sp_size</item>
+    </style>
+
+    <style name="details_text">
+        <item name="android:textColor"> @color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">serif-monospace</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/txt_25sp_size</item>
+    </style>
+
 </resources>

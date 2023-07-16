@@ -74,7 +74,7 @@ class MarvelLogic {
 
     }
 
-    suspend fun getInitChars(page:Int): List<MarvelChars> {
+    suspend fun getInitChars(limit: Int,offset: Int): MutableList<MarvelChars> {
         var items = mutableListOf<MarvelChars>()
         try{
             items = MarvelLogic()
@@ -82,15 +82,13 @@ class MarvelLogic {
                 .toMutableList()
             if (items.isEmpty()){
                 items=(MarvelLogic().getAllMarvelChars(
-                    0,page*3
+                    offset = offset, limit = limit
                 ))
                 MarvelLogic().insertMarvelCharstoDB(items)
             }
+            return items
         }catch (ex:Exception){
             throw RuntimeException(ex.message)
         }
-
-
-        return items
     }
 }

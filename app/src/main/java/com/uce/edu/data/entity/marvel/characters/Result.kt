@@ -18,13 +18,17 @@ data class Result(
 
 fun Result.getMarvelChars():MarvelChars{
     var comic :String ="No available"
+   // var desc = "no available"
     if(comics.items.isNotEmpty()){
         comic = comics.items[0].name
     }
 
+//    if(description.isNotEmpty()){
+//        desc=description
+//    }
+
     val a = MarvelChars(
-        id,name,comic,
-        thumbnail.path+"."+thumbnail.extension
+        id,name,comic,thumbnail.path+"."+thumbnail.extension
     )
     return a
 }

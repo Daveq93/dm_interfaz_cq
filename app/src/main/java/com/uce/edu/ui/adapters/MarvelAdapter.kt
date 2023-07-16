@@ -18,11 +18,10 @@ class MarvelAdapter(private var fnClick:(MarvelChars) -> Unit) ://no devuelve na
         private val binding : MarvelCharactersBinding= MarvelCharactersBinding.bind(view)
         fun render(item: MarvelChars, fnClick:(MarvelChars) -> Unit){
             println("Recibiendo a: ${item.name}")
-            binding.imageView1.bringToFront()
+           // binding.imageView1.bringToFront()
             binding.txtName.text = item.name
             binding.txtComic.text =item.comic
             Picasso.get().load(item.image).into(binding.imageView1)
-
            itemView.setOnClickListener {
                // Snackbar.make(binding.imageView1,item.name,Snackbar.LENGTH_SHORT).show()
                    fnClick(item)
@@ -53,6 +52,6 @@ class MarvelAdapter(private var fnClick:(MarvelChars) -> Unit) ://no devuelve na
     }
     fun replaceListAdapter(newItems:List<MarvelChars>){
         this.items = newItems
-            notifyDataSetChanged()
+        notifyDataSetChanged()
     }
 }
