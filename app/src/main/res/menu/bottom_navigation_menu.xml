@@ -9,6 +9,12 @@
         android:title="@string/inicio"
         android:visible="true" />
     <item
+        android:id="@+id/search"
+        android:enabled="true"
+        android:icon="@drawable/baseline_search_24"
+        android:title="@string/buscar"
+        android:visible="true" />
+    <item
         android:id="@+id/favoritos"
         android:enabled="true"
         android:icon="@drawable/baseline_favorite_24"

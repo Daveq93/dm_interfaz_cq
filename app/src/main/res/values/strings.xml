@@ -11,9 +11,10 @@
     <string name="btn_facebook">Facebook</string>
     <string name="btn_twitter">Twitter</string>
     <string name="label_registro">Registrese</string>
-    <string name="label_olvido_pass"></string>
+    <string name="label_olvido_pass">olvido su contrasenia</string>
     <string name="favoritos">Favoritos</string>
-    <string name="chat_gpt">Chat GPT</string>
+    <string name="chat_gpt">GPT</string>
+    <string name="buscar">Buscar</string>
     <string name="inicio">Inicio</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
