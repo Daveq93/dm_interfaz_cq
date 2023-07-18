@@ -1,16 +1,21 @@
 package com.uce.edu.ui.activities
 
+import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.snackbar.Snackbar
 import com.uce.edu.R
 import com.uce.edu.databinding.ActivityMainBinding
 import com.uce.edu.logic.validator.LoginValidator
@@ -63,7 +68,42 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
             }
         }
+
+        binding.btnTwitter.setOnClickListener{
+//            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:-0.200628,-78.5786066"))
+//             startActivity(intent)//no se que app va a abrir la url
+                                 //ACTION_SEARCH
+        val intentX = Intent(Intent.ACTION_WEB_SEARCH)
+            intentX.setClassName("com.google.android.googlequicksearchbox",
+                "com.google.android.googlequicksearchbox.SearchActivity")
+           intentX.putExtra(SearchManager.QUERY,"UCE")
+
+            startActivity(intentX)
+        }
+
+        val appResultLocal= registerForActivityResult(StartActivityForResult()){resultActivity->
+            when(resultActivity.resultCode){
+                RESULT_OK ->{
+                    Log.d("UCE","Resultado exitoso")
+                    Snackbar.make(binding.txtOrreo,"Resultadp exitoso",Snackbar.LENGTH_LONG).show()
+                }
+
+                RESULT_CANCELED->{Log.d("UCE","Resultado fallido")
+                    Snackbar.make(binding.txtOrreo,"Resultadp fallido",Snackbar.LENGTH_LONG).show()
+                }
+                else->{Log.d("UCE","Resultado dudoso" +
+                        "")
+
+                }
+            }
+
+        }
+        binding.btnFacebook.setOnClickListener{
+         val resIntent = Intent(this,ResultActivity::class.java)
+          appResultLocal.launch(resIntent)
+        }
     }
+    //https://api.whatsapp.com/send?phone=593 &text=
 
     private suspend fun saveDataStore(stringData:String){
         dataStore.edit {prefs->//hace una funcion suspendida y se tiene que ejecutar en una corrutina
