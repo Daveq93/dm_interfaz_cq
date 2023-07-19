@@ -1,5 +1,6 @@
 package com.uce.edu.ui.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.uce.edu.R
@@ -19,12 +20,15 @@ class ResultActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         binding.btnResult.setOnClickListener{
-
+                 val i = Intent()
+            i.putExtra("result","Resultado exitoso")
              setResult(RESULT_OK)
             finish()//matamos el estado, se ejecuta el onDestroy
         }
 
         binding.btnResultFalse.setOnClickListener{
+            val i = Intent()
+            i.putExtra("result","Resultado fallido")
               setResult(RESULT_CANCELED)
             finish()//matamos el estado, se ejecuta el onDestroy
         }
