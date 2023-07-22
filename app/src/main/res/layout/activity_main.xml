@@ -58,12 +58,13 @@
         app:layout_constraintTop_toBottomOf="@id/text_saludo" />
 
     <EditText
-        android:id="@+id/txt_orreo"
+        android:id="@+id/txt_correo"
         android:layout_width="329dp"
         android:layout_height="48dp"
         android:layout_marginStart="@dimen/marginStartEnd"
         android:layout_marginEnd="@dimen/marginStartEnd"
         android:hint="@string/hint_user_name"
+        android:textColor="@color/melon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lbl_correo" />
@@ -172,7 +173,6 @@ android:drawableLeft="@drawable/facebook_30"
         android:layout_height="wrap_content"
         android:layout_marginStart="125dp"
         android:layout_marginTop="20dp"
-
         android:layout_marginEnd="@dimen/marginStartEnd"
         android:text="Registrese"
         app:layout_constraintEnd_toEndOf="parent"
