@@ -6,8 +6,8 @@ import com.uce.edu.data.endpoint.MarvelEndPoint
 import com.uce.edu.data.entity.marvel.characters.database.MarvelCharsDB
 import com.uce.edu.data.entity.marvel.characters.database.getMarvelChars
 import com.uce.edu.data.entity.marvel.characters.getMarvelChars
-import com.uce.edu.logic.data.MarvelChars
-import com.uce.edu.logic.data.getMarvelCharsDB
+import com.uce.edu.data.entity.marvel.characters.database.data.MarvelChars
+import com.uce.edu.data.entity.marvel.characters.database.data.getMarvelCharsDB
 import com.uce.edu.ui.utilities.DispositivosMoviles
 import kotlin.math.log
 

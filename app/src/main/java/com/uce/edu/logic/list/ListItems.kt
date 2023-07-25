@@ -1,7 +1,7 @@
 package com.uce.edu.logic.list
 
 import com.uce.edu.data.entity.LoginUser
-import com.uce.edu.logic.data.MarvelChars
+import com.uce.edu.data.entity.marvel.characters.database.data.MarvelChars
 
 class ListItems {
 fun returnItems():List<LoginUser>{

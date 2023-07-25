@@ -3,7 +3,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.squareup.picasso.Picasso
 import com.uce.edu.databinding.ActivityDetailsMarvelItemBinding
-import com.uce.edu.logic.data.MarvelChars
+import com.uce.edu.data.entity.marvel.characters.database.data.MarvelChars
 
 class DetailsMarvelItem : AppCompatActivity() {
 

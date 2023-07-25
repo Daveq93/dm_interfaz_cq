@@ -1,6 +1,6 @@
 package com.uce.edu.data.entity.marvel.characters
 
-import com.uce.edu.logic.data.MarvelChars
+import com.uce.edu.data.entity.marvel.characters.database.data.MarvelChars
 
 data class Result(
     val comics: Comics,
@@ -16,7 +16,7 @@ data class Result(
     val urls: List<Url>
 )
 
-fun Result.getMarvelChars():MarvelChars{
+fun Result.getMarvelChars(): MarvelChars {
     var comic :String ="No available"
    // var desc = "no available"
     if(comics.items.isNotEmpty()){

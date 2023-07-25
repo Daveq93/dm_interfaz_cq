@@ -2,7 +2,7 @@ package com.uce.edu.logic.jikanLogic
 
 import com.uce.edu.data.connections.ApiConnection
 import com.uce.edu.data.endpoint.JikanEndPoint
-import com.uce.edu.logic.data.MarvelChars
+import com.uce.edu.data.entity.marvel.characters.database.data.MarvelChars
 
 class JikanAnimeLogic {
 

@@ -1,4 +1,4 @@
-package com.uce.edu.logic.data
+package com.uce.edu.data.entity.marvel.characters.database.data
 
 import android.os.Parcelable
 import com.uce.edu.data.entity.marvel.characters.database.MarvelCharsDB

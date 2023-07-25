@@ -3,7 +3,7 @@ package com.uce.edu.data.entity.marvel.characters.database
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.uce.edu.logic.data.MarvelChars
+import com.uce.edu.data.entity.marvel.characters.database.data.MarvelChars
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
