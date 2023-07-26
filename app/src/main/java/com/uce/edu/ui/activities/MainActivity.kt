@@ -10,6 +10,7 @@ import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
+import android.provider.Settings
 import android.speech.RecognizerIntent
 import android.util.Log
 
@@ -31,14 +32,17 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.google.android.gms.location.Priority
+import com.google.android.gms.location.SettingsClient
 
 
 import com.google.android.material.snackbar.Snackbar
 import com.uce.edu.R
 import com.uce.edu.databinding.ActivityMainBinding
 import com.uce.edu.logic.validator.LoginValidator
+import com.uce.edu.ui.utilities.MyLocationManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Locale
@@ -50,14 +54,17 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "se
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient//nos da el acceso a la ubicacion
 
     private lateinit var binding: ActivityMainBinding
 
+    //ubicacion y gps
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient//nos da el acceso a la ubicacion
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallBak: LocationCallback
 
-    private var currentLocation: Location? = null
+    // private var currentLocation: Location? = null
+    private lateinit var client: SettingsClient
+    private lateinit var locationSettingsRequest: LocationSettingsRequest
 
     private val speechToText =
         registerForActivityResult(StartActivityForResult()) { activityResult ->
@@ -99,36 +106,60 @@ class MainActivity : AppCompatActivity() {
             when (isGranted) {
                 true -> {
 
-                    val task = fusedLocationProviderClient.lastLocation
-                    task.addOnSuccessListener { location ->
-                        val alert = AlertDialog.Builder(this)
-                        alert.apply {
-                            setTitle("Alerta")
-                            setMessage("Existe un problema con el sistema de posicionamiento")
-                            setPositiveButton("ok") { dialog, id ->
-                                dialog.dismiss()
-                            }
-                            setNegativeButton("cancelar"){dialog,id->
-                                dialog.dismiss()
-                            }
-                            setCancelable(false)//hasta que no se de en ok, no va a salir
-                        }.create()
-                        alert.show()
+//                    val task = fusedLocationProviderClient.lastLocation
+//                    task.addOnSuccessListener { location ->
+//                        val alert = AlertDialog.Builder(this)
+//                        alert.apply {
+//                            setTitle("Alerta")
+//                            setMessage("Existe un problema con el sistema de posicionamiento")
+//                            setPositiveButton("ok") { dialog, id ->
+//                                dialog.dismiss()
+//                            }
+//                            setNegativeButton("cancelar"){dialog,id->
+//                                dialog.dismiss()
+//                            }
+//                            setCancelable(false)//hasta que no se de en ok, no va a salir
+//                        }.create()
+//                        alert.show()
+//
+//                        fusedLocationProviderClient.requestLocationUpdates(
+//                            locationRequest,
+//                            locationCallBak,
+//                            Looper.getMainLooper()
+//                        )
+                    client.checkLocationSettings(locationSettingsRequest).apply {
+                        addOnSuccessListener {
+                            val task = fusedLocationProviderClient.lastLocation
+                            task.addOnSuccessListener { location ->
+                                fusedLocationProviderClient.requestLocationUpdates(
+                                    locationRequest,
+                                    locationCallBak,
+                                    Looper.getMainLooper()
 
-                        fusedLocationProviderClient.requestLocationUpdates(
-                            locationRequest,
-                            locationCallBak,
-                            Looper.getMainLooper()
-                        )
-                    }
-                    task.addOnFailureListener {ex->
-                        if(ex is ResolvableApiException){
-                            ex.startResolutionForResult(
-                                this@MainActivity,
-                               LocationSettingsStatusCodes.RESOLUTION_REQUIRED
-                            )
+                                )
+                            }
                         }
+                        addOnFailureListener { ex ->
+                            //  startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+                            if (ex is ResolvableApiException) {
+                                ex.startResolutionForResult(
+                                    this@MainActivity,
+                                    LocationSettingsStatusCodes.RESOLUTION_REQUIRED
+                                )
+                            }
+                        }
+
+
                     }
+
+//                    task.addOnFailureListener {ex->
+//                        if(ex is ResolvableApiException){
+//                            ex.startResolutionForResult(
+//                                this@MainActivity,
+//                               LocationSettingsStatusCodes.RESOLUTION_REQUIRED
+//                            )
+//                        }
+//                    }
                 }
                 //me sirve para informar al usuario para informar del porque de la necesidad de activar la ubicacion
                 //el access coarse sirve para saver algo no tan concreto en cuando a la ubicacion=> pais, sector, .. etc.
@@ -153,6 +184,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         locationRequest = LocationRequest.Builder(
             Priority.PRIORITY_HIGH_ACCURACY,
@@ -165,7 +198,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (lacationResult != null) {
                     lacationResult.locations.forEach { location ->
-                        currentLocation = location
+                        //currentLocation = location
                         Log.d(
                             "UCE",
                             "Ubicacion: latitud ${location.latitude}, longitud ${location.longitude}"
@@ -173,7 +206,10 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-        }                                                            //mayor exactitud que se actualiuce cada 1 segundo
+        }
+        locationSettingsRequest =
+            LocationSettingsRequest.Builder().addLocationRequest(locationRequest).build()
+        client = LocationServices.getSettingsClient(this)
     }
 
     override fun onStart() {
@@ -282,7 +318,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-    //https://api.whatsapp.com/send?phone=593 &text=
+//https://api.whatsapp.com/send?phone=593 &text=
 
     private suspend fun saveDataStore(stringData: String) {
         dataStore.edit { prefs ->//hace una funcion suspendida y se tiene que ejecutar en una corrutina
@@ -297,6 +333,12 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         fusedLocationProviderClient.removeLocationUpdates(locationCallBak)
+    }
+
+    private fun test() {
+        var location = MyLocationManager(this)
+        // location.context= this
+        location.getUserLocation()
     }
 
 }
