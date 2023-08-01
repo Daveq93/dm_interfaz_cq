@@ -47,21 +47,24 @@ dependencies {
 
     //para notific actualizar a 1.10.1
     implementation 'androidx.core:core-ktx:1.10.1'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
+    //imagenes
     implementation 'com.squareup.picasso:picasso:2.8'
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01"
+    //refresh pantalla
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     //obtenido de la pagina retrofit android
-    //Retrofit
+    //Retrofit api nos permite conectar a la api y que nos den una respuesta
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    //GSON
+    //GSON necesitamos de gson para esto utilizamos nos ayuda a convertir de un gson a un objeto
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
 
@@ -72,10 +75,10 @@ dependencies {
 
 
     //------Room-----
-    implementation ("androidx.room:room-runtime:2.5.0")
-    annotationProcessor ("androidx.room:room-compiler:2.5.0")
+    implementation ("androidx.room:room-runtime:2.5.2")
+    annotationProcessor ("androidx.room:room-compiler:2.5.2")
 
-    kapt ("androidx.room:room-compiler:2.5.0")
+    kapt ("androidx.room:room-compiler:2.5.2")
 
 
     //Data Store

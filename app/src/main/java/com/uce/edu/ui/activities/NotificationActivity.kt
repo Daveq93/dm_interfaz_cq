@@ -1,16 +1,23 @@
 package com.uce.edu.ui.activities
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.uce.edu.R
 import com.uce.edu.databinding.ActivityNotificationBinding
+import com.uce.edu.ui.utilities.BroadcasterNotifications
+import java.util.Calendar
 
 
 class NotificationActivity : AppCompatActivity() {
@@ -18,16 +25,45 @@ class NotificationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNotificationBinding
 
 
+    val ca = Calendar.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         binding = ActivityNotificationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        createNotificationChannel()
+
+
 
         //error en el binding
         binding.btnNotification.setOnClickListener {
             sendNotification()
         }
+
+        binding.btnNotificationProgramada.setOnClickListener{
+           // val calendar=Calendar.getInstance()
+
+            val hora = binding.timePicker.hour
+            val minutos = binding.timePicker.minute
+
+           Toast.makeText(this,"la notificacion se activara a: $hora con $minutos minutos",Toast.LENGTH_SHORT).show()
+          ca.set(Calendar.HOUR,hora)
+            ca.set(Calendar.MINUTE,minutos)
+            ca.set(Calendar.SECOND,0)
+
+            sendNotificationTimePicker(ca.timeInMillis)
+        }
+
+
+
+    }
+    private fun sendNotificationTimePicker(time:Long){
+val myIntent = Intent(applicationContext,BroadcasterNotifications::class.java)
+        val myPendingIntent = PendingIntent.getBroadcast(applicationContext,0,myIntent,PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP,time,myPendingIntent)
 
     }
 
@@ -80,3 +116,15 @@ class NotificationActivity : AppCompatActivity() {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+

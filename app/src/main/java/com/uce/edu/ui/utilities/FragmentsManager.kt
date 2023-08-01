@@ -2,7 +2,6 @@ package com.uce.edu.ui.utilities
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.uce.edu.ui.fragments.FirstFragment
 
 class FragmentsManager {
 
