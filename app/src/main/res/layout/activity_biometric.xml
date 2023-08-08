@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.BiometricActivity">
 
+    <LinearLayout
+        android:id="@+id/lytmain"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+    
+    
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
@@ -14,20 +28,33 @@
         android:gravity="center"
         android:text="Autenticacion Biometrica"
         android:textSize="42sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
+        ></TextView>
 
     <ImageView
         android:id="@+id/btnAuth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-
         android:src="@drawable/baseline_fingerprint_24"
+      ></ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lytmainCopia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"></ImageView>
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include layout="@layout/shimmer_layout_biometric"/>
+
+        <include layout="@layout/shimmer_layout_biometric"/>
+        <include layout="@layout/shimmer_layout_biometric"/>
+    </LinearLayout>
+
+    
 
 </androidx.constraintlayout.widget.ConstraintLayout>

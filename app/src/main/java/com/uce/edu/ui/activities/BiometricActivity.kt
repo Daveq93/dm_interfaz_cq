@@ -4,26 +4,48 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.view.View
+import androidx.activity.viewModels
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.uce.edu.R
 import com.uce.edu.databinding.ActivityBiometricBinding
+import com.uce.edu.ui.viewModels.BiometricViewModel
+import kotlinx.coroutines.launch
 
 class BiometricActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBiometricBinding
 
+    private val biometricViewModel by viewModels<BiometricViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBiometricBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.btnAuth.setOnClickListener {
-            aunticateBiometric()
+            lifecycleScope.launch {
+                biometricViewModel.chargingData()
+            }
+        }
+
+        biometricViewModel.isLoading.observe(this){
+            isLoading->
+            if(isLoading){
+                binding.lytmain.visibility= View.GONE
+                binding.lytmainCopia.visibility=View.VISIBLE
+            }else{
+                binding.lytmain.visibility= View.VISIBLE
+                binding.lytmainCopia.visibility=View.GONE
+            }
+        }
+        lifecycleScope.launch {
+            biometricViewModel.chargingData()
         }
 
     }
