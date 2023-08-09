@@ -5,21 +5,16 @@ import android.annotation.SuppressLint
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
-import android.location.Location
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
-import android.provider.Settings
 import android.speech.RecognizerIntent
 import android.util.Log
 
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
-import androidx.appcompat.app.AlertDialog
-import androidx.core.content.PermissionChecker.PermissionResult
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -36,12 +31,17 @@ import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.google.android.gms.location.Priority
 import com.google.android.gms.location.SettingsClient
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.uce.edu.R
 import com.uce.edu.databinding.ActivityMainBinding
 import com.uce.edu.logic.validator.LoginValidator
+import com.uce.edu.ui.utilities.Constants
 import com.uce.edu.ui.utilities.MyLocationManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -61,6 +61,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient//nos da el acceso a la ubicacion
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallBak: LocationCallback
+
+    //autenticacion con firebase
+    private lateinit var auth: FirebaseAuth
+
 
     // private var currentLocation: Location? = null
     private lateinit var client: SettingsClient
@@ -106,27 +110,6 @@ class MainActivity : AppCompatActivity() {
             when (isGranted) {
                 true -> {
 
-//                    val task = fusedLocationProviderClient.lastLocation
-//                    task.addOnSuccessListener { location ->
-//                        val alert = AlertDialog.Builder(this)
-//                        alert.apply {
-//                            setTitle("Alerta")
-//                            setMessage("Existe un problema con el sistema de posicionamiento")
-//                            setPositiveButton("ok") { dialog, id ->
-//                                dialog.dismiss()
-//                            }
-//                            setNegativeButton("cancelar"){dialog,id->
-//                                dialog.dismiss()
-//                            }
-//                            setCancelable(false)//hasta que no se de en ok, no va a salir
-//                        }.create()
-//                        alert.show()
-//
-//                        fusedLocationProviderClient.requestLocationUpdates(
-//                            locationRequest,
-//                            locationCallBak,
-//                            Looper.getMainLooper()
-//                        )
                     client.checkLocationSettings(locationSettingsRequest).apply {
                         addOnSuccessListener {
                             val task = fusedLocationProviderClient.lastLocation
@@ -178,12 +161,81 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    private fun createUserWithEmailAndPassword(email:String, password:String) {
+        auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener { task->
+            if (task.isSuccessful) {
+                // Sign in success, update UI with the signed-in user's information
+                Log.d(Constants.TAG, "createUserWithEmail:success")
+                val user = auth.currentUser
+                Toast.makeText(
+                    baseContext,
+                    "Authentication Success.",
+                    Toast.LENGTH_SHORT,
+                ).show()
+            } else {
+                // If sign in fails, display a message to the user.
+                Log.w(Constants.TAG, "createUserWithEmail:failure", task.exception)
+                Toast.makeText(
+                    baseContext,
+                    "Authentication failed.",
+                    Toast.LENGTH_SHORT,
+                ).show()
+            }
+        }
+
+    }
+
+    private fun signInWithEmailAndPass(email:String, password:String){
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(Constants.TAG, "signInWithEmail:success")
+                    val user = auth.currentUser
+startActivity(Intent(this,SegundaPantalla::class.java))
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(Constants.TAG, "signInWithEmail:failure", task.exception)
+                    Toast.makeText(
+                        baseContext,
+                        "Authentication failed.",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+
+                }
+            }
+    }
+
+    private fun recoveryPassWithEmail(email:String){
+        auth.sendPasswordResetEmail(email).addOnCompleteListener {task->
+        if(task.isSuccessful){
+            Toast.makeText(this,"Correo de recuperacion enviado correctamente",Toast.LENGTH_SHORT).show()
+            MaterialAlertDialogBuilder(this).apply {
+                setTitle("Alert")
+                setMessage("Correo de recuperacion enviado correctamente")
+                setCancelable(true)
+            }.show()
+        }
+
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        auth = Firebase.auth
+
+        binding.btnIngresar.setOnClickListener{
+            createUserWithEmailAndPassword(
+                binding.txtCorreo.toString(),
+                binding.txtPass.toString()
+
+            )
+
+        }
 
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)

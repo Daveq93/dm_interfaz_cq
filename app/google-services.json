@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "527452404617",
+    "project_id": "practica-uce-84da5",
+    "storage_bucket": "practica-uce-84da5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527452404617:android:8c60065a7fdd918d043f58",
+        "android_client_info": {
+          "package_name": "com.uce.edu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527452404617-b7jh4sc686098j0upcvgnud650nckmij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACHeDXrjavJ-RbZ_PQiPt2yVsatpQ4_s0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527452404617-b7jh4sc686098j0upcvgnud650nckmij.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
